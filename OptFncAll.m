@@ -8,7 +8,7 @@ sse = 0;
 coefs = EvalPoly( c, mForLambda );
 
 for j = 1:length(mForLambda)
-    sigmaFc = fc( coefs(j,:), mForLambda(j), lambda{j});
+    sigmaFc = fc( coefs(j,:), lambda{j});
     sse = sse + sum( (sigmaFc - sigma{j}).^2 );
 end
 

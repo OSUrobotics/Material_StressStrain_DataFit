@@ -18,10 +18,5 @@ coefsPoly = Mmat \ coefsIndiv;
 %   -pn= for coef n
 coefsPoly = coefsPoly';
 
-% Reconstruct polynomial and plot
-coefsCheck = EvalPoly( coefsPoly, m );
-
-PlotDataAndFits( coefsCheck, allData.lambda, allData.sigma );
-
 end
 

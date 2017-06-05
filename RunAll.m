@@ -1,6 +1,7 @@
 %% Read in the data (if it isn't already)
 
 dir = 'DataFilesAll/';
+dirOut = 'Images/';
 if ~exist( 'allData', 'var' );
     fname = strcat( dir, 'AllData.mat' );
     if exist( fname, 'file' )
@@ -25,34 +26,5 @@ C_init = [
     ]; 
 
 %Parameters
-nameFc = 'Ogden';
-fc = @ogdenFc;
-degPoly = 3;
+coefsOgden3 = FitFull( allData, C_init, 'Ogden', ogdenFc, 3 );
 
-% Fit each material individually
-coefsIndiv = FitSingleMaterialAll( allData, fc, C_init );
-
-figure(1)
-PlotDataAndFits( coefsIndiv, fc, lambda, sigma )
-
-% Fit all materials together
-figure(2)
-[m, coefsPoly] = FitAllMaterials( allData, coefsIndiv, degPoly, fc );
-
-% Reconstruct polynomial and plot
-figure(3)
-coefsCheck = EvalPoly( coefsPoly, m );
-PlotDataAndFits( coefsCheck, fc, lambda, sigma )
-
-coefs = struct;
-coefs.Individual = coefsIndiv;
-coefs.All = coefsPoly;
-save( strcat(dir, nameFc, 'coefs.mat'), 'coefs' );
-
-
-
-
-coefsFinal = FitAllMaterials( allData, coefs2, 2, @ogden_objective_A );
-
-% plot stress/strain data with model with C_final coefficients to confirm fit
-% plot C_final coefficients/m with A coefficients to confirm fit

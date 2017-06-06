@@ -1,17 +1,17 @@
-function [ coefs ] = FitFull( allData, C_init, fcName, fc, degPoly )
+function [ coefs ] = ReFitFull( allData, coefsIn, fcName, fc, degPoly )
 %FitFull Fit individual, fit polynomial, plot
 %   fcName : name of function
 %   fc : actual function
 %   degPoly : degree of polynomial
 
 % Save out coefficients at each stage
-coefs = struct;
+coefs = coefsIn;
 
 dirOut = 'Images/';
 nameFc = sprintf('%s_deg%0.0f', fcName, degPoly);
 
 % Fit each material individually
-[coefsIndiv, RVals] = FitSingleMaterialAll( allData, fc, C_init );
+[coefsIndiv, RVals] = FitSingleMaterialAll( allData, fc, coefsIn.Individual );
 coefs.Individual = coefsIndiv;
 coefs.IndividualRVals = RVals;
 
@@ -40,8 +40,8 @@ saveGraphics( strcat(dirOut, nameFc, '_Poly.png'),[520,700]);
 
 % Reconstruct polynomial and plot
 figure(3)
-% Optimize
-coefsPolyFitted = FitAllMaterials( allData, m, coefsPoly, fc );
+% Optimize - use last optimized values
+coefsPolyFitted = FitAllMaterials( allData, m, coefsIn.PolyFitted, fc );
 % save
 coefs.PolyFitted = coefsPolyFitted;
 

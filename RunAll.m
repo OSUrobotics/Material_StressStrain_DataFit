@@ -15,15 +15,18 @@ end
 
 
 %Parameters
-names = {'Ogden', 'Martin', 'PolyCubic', 'PolyQuartic', 'PolyQuintic'};
-nCoefs = [6, 4, 4, 5, 6];
+names = {'Ogden', 'Martin', 'Yeoh', 'PolyCubic', 'PolyQuartic', 'PolyQuintic'};
+nCoefs = [6, 4, 4, 4, 5, 6];
 degsPoly = [2 3 4];
-fcs = {@ogdenFc, @martinsFc, @polyFc, @polyFc, @polyFc};
+fcs = {@ogdenFc, @martinsFc, @yeohsFc, @polyFc, @polyFc, @polyFc};
 
 for f = 1:length(names)
     name = names{f};
     fc = fcs{f};
+
+    fprintf('Running %s: \n', name);
     for degPoly = degsPoly
+        fprintf('Running poly fit %0.0f\n', degPoly);
         fname = sprintf('%scoefs_%s_%d.mat', dir, name, degPoly);
         CInit = ones( length( allData.sigma ), nCoefs(f) );
         if exist( fname, 'file' );

@@ -16,7 +16,7 @@ coefs.Individual = coefsIndiv;
 coefs.IndividualRVals = RVals;
 
 figure(1)
-PlotDataAndFits( coefsIndiv, fc, allData.lambda, allData.sigma )
+PlotDataAndFits( coefsIndiv, fc, allData.lambda, allData.sigma, fcName )
 saveGraphics( strcat(dirOut, nameFc, '_Individual.png'),[520,700]);
 
 
@@ -35,7 +35,7 @@ coefsCheckAllFitPoly = EvalPoly( coefsPoly, m );
 % Get RVals
 coefs.PolyRVal = CalculateRVals( allData, coefsCheckAllFitPoly , fc);
 % and plot
-PlotDataAndFits( coefsCheckAllFitPoly, fc, allData.lambda, allData.sigma )
+PlotDataAndFits( coefsCheckAllFitPoly, fc, allData.lambda, allData.sigma, fcName )
 saveGraphics( strcat(dirOut, nameFc, '_Poly.png'),[520,700]);
 
 % Reconstruct polynomial and plot
@@ -49,7 +49,7 @@ coefs.PolyFitted = coefsPolyFitted;
 coefsCheckAllFit = EvalPoly( coefsPolyFitted, m );
 % Get RVals
 coefs.FinalRVal = CalculateRVals( allData, coefsCheckAllFit , fc);
-PlotDataAndFits( coefsCheckAllFit, fc, allData.lambda, allData.sigma )
+PlotDataAndFits( coefsCheckAllFit, fc, allData.lambda, allData.sigma, fcName )
 saveGraphics( strcat(dirOut, nameFc, '_PolyFitted.png'),[520,700]);
 
 end
